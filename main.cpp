@@ -330,6 +330,10 @@ struct HasherMHash : public Hasher32Bit
 {
 	HashType operator()(const void* data, size_t size) const { return mhash(0xdefaced, data, size); }
 };
+struct HasherMHashPlatform : public Hasher32Bit
+{
+	HashType operator()(const void* data, size_t size) const { return mhash_platform(0xdefaced, data, size); }
+};
 struct HasherMD5_32 : public Hasher32Bit
 {
 	HashType operator()(const void* data, size_t size) const
@@ -499,6 +503,7 @@ extern "C" void HashFunctionsTestEntryPoint(const char* folderName)
 	ADDHASH("SipRef-32", HasherSipRef_32, 1);
 	ADDHASH("CRC32", HasherCRC32, 0);
 	ADDHASH("mhash", HasherMHash, 0);
+	ADDHASH("mhash-platform", HasherMHashPlatform, 0);
 	ADDHASH("MD5-32", HasherMD5_32, 0);
 	ADDHASH("SHA1-32", HasherSHA1_32, 0);
 	ADDHASH("FNV-1a", FNV1aHash, 0);
