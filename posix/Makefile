@@ -1,5 +1,6 @@
 CFLAGS:=-g -Wall -Werror -Wno-sign-compare
 CFLAGS+= -O2
+CFLAGS+= -msse4
 CXXFLAGS:=$(CFLAGS)
 LDFLAGS:=-g
 LDLIBS:=-lm

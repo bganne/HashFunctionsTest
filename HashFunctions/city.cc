@@ -512,6 +512,7 @@ uint128 CityHash128(const char *s, size_t len) {
       CityHash128WithSeed(s, len, uint128(k0, k1));
 }
 
+#if 0
 #ifdef __SSE4_2__
 #include <citycrc.h>
 #include <nmmintrin.h>
@@ -643,4 +644,5 @@ uint128 CityHashCrc128(const char *s, size_t len) {
   }
 }
 
+#endif
 #endif
