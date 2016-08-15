@@ -33,6 +33,10 @@
 #	define PLATFORM_PS4 1
 #endif
 
+#if defined(__unix__)
+#	define PLATFORM_POSIX 1
+#endif
+
 
 // ------------------------------------------------------------------------------------
 // Misc
@@ -104,6 +108,24 @@
 
 #elif PLATFORM_PS4
 	// CENSORED
+
+#elif PLATFORM_POSIX
+	#include <stdint.h>
+	#include <time.h>
+	static uint64_t s_Time0;
+	static void TimerBegin()
+	{
+		struct timespec ts;
+		clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts);
+		s_Time0 = ts.tv_sec * 1000000000 + ts.tv_nsec;
+	}
+	static float TimerEnd()
+	{
+		struct timespec ts;
+		clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts);
+		return (ts.tv_sec * 1000000000 + ts.tv_nsec - s_Time0) * 1e-9f;
+	}
+
 
 #else
 	#error "Unknown platform, timer code missing"

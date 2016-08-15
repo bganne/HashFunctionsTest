@@ -1,0 +1,3 @@
+To build, just do:
+~# make -C posix
+From the top directory.
